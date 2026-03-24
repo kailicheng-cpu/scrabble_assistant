@@ -1,6 +1,15 @@
-'''Loops through dictionary and collects playable words
-input: Letters (sorted)
-return: list of possible words
+'''
+Loops through the dictionary and collects all playable words
+
+Generates possible letter combinations from the given rack of tiles
+Checks which combinations form valid words by comparing them with the dictionary
+Returns only real, game-ready words that can actually be made from the input letters
+
+input: Group of letters/tiles from the player's board
+output: list of valid playable words
+
+Note:
+Use a set for the generated possible combinations, because a set removes duplicate combination of letters
 '''
 class WordFinder:
     def __init__(self):
