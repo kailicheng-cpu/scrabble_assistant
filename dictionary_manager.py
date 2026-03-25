@@ -4,6 +4,8 @@ class DictionaryManager:
         self.file_name = 'dictionary.txt'
         self.word_list = []
 
+        self.load_dictionary()
+
     def load_dictionary(self):
         '''
         Read each line from the dictionary file, remove extra whitespace and store all words in a list
@@ -14,7 +16,7 @@ class DictionaryManager:
 
             # Reads each line of the file and saves each line as a value in a list
             for line in file:
-                self.words_list.append(line.strip())
+                self.word_list.append(line.strip())
 
     def get_word_list(self):
         '''
@@ -23,3 +25,6 @@ class DictionaryManager:
         The word list requested
         '''
         return self.word_list
+
+dictionarymanager = DictionaryManager()
+print(dictionarymanager.get_word_list())
