@@ -29,31 +29,66 @@ class WordFinder:
         print(self.dictionary_words)
 
     def generate_combo(self, tiles:list):
-        tiles = (t.upper() for t in tiles)
+        '''
+        Will result in a set of all possible combinations using the given tiles
+        :param tiles: list
+            players tiles/letters that they want to create words using
+        :return: None
+        '''
+        for t in range(len(tiles)):
+            tiles[t] = tiles[t].upper()
 
         # starting off the recursive method empty
         self.combo_building("", tiles)
 
+        # Output all generated combinations
         print(self.generated_combinations)
 
     def combo_building(self, current_combo, remaining_tiles:list):
+        '''
+        Recursively build all possible letter/tile combinations
+        As long as the current combo is not empty it will continue to add the current combo to the set
+        until there are no longer any remaining tiles
 
-        #adding the current combo to the set of results if not empty
+        At each step:
+        - Add the current combination to the set (if not empty)
+        - Try adding each remaining letter to the combination
+        - Remove that letter from the pool and recurse
+
+        :param current_combo: str
+            previous build word or empty string, to add letters to continue building combinations
+        :param remaining_tiles:
+        :return:
+        '''
+        #adding the current combo to set (ignored if current is empty)
         if current_combo:
             self.generated_combinations.add(current_combo)
 
-        else:
-            for i in range(len(remaining_tiles)):
-                letter = remaining_tiles[i]
+        for i in range(len(remaining_tiles)):
 
-                new_combo = current_combo + letter
-                new_remainder = remaining_tiles[:i]+remaining_tiles[i:]
+            # Choose a letter at index i
+            letter = remaining_tiles[i]
+            print(letter) # debugging: shows which letter is chosen--> based on i (the for loop)
 
-                self.combo_building(new_combo, new_remainder)
+            # Build a new combination by adding the chosen letter
+            new_combo = current_combo + letter
+            print(new_combo)  # debugging: shows which combo is made
+
+            new_remainder = remaining_tiles[:i]+remaining_tiles[i+1:]
+            print(new_remainder) # debugging: shows which letter are remaining--> therefore used in the recursive portion
+
+            # Recursive call:
+            # Continue building using the updated combo and remaining letters
+            self.combo_building(new_combo, new_remainder)
 
 
 # making sure words are being loaded correctly
 wordfinder = WordFinder()
 wordfinder.load_words()
 
-wordfinder.generate_combo(['c', 'A', 'T'])
+wordfinder.generate_combo([]) # Output: [] --> empty list
+wordfinder.generate_combo(['A']) # Output: ['A'] --> single Value
+wordfinder.generate_combo(['A', 'G', 'L', 'P']) # multiple Values/long input
+wordfinder.generate_combo(['A', 'A']) # Output: ['A', 'AA'] --> Repeated letters will create duplicate combos that the set should remove
+wordfinder.generate_combo(['c', 'A', 'T']) # Output: ['CAT', 'ACT',...] --> case sensitivity, 'c' should be caplitalized
+wordfinder.generate_combo(['A', '1', '?']) # Different Characters--> special character(s) used for wild cards later
