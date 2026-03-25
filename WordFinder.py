@@ -68,27 +68,47 @@ class WordFinder:
 
             # Choose a letter at index i
             letter = remaining_tiles[i]
-            print(letter) # debugging: shows which letter is chosen--> based on i (the for loop)
+            #print(letter) # debugging: shows which letter is chosen--> based on i (the for loop)
 
             # Build a new combination by adding the chosen letter
             new_combo = current_combo + letter
-            print(new_combo)  # debugging: shows which combo is made
+            #print(new_combo)  # debugging: shows which combo is made
 
             new_remainder = remaining_tiles[:i]+remaining_tiles[i+1:]
-            print(new_remainder) # debugging: shows which letter are remaining--> therefore used in the recursive portion
+            #print(new_remainder) # debugging: shows which letter are remaining--> therefore used in the recursive portion
 
             # Recursive call:
             # Continue building using the updated combo and remaining letters
             self.combo_building(new_combo, new_remainder)
+
+    def reset_generation(self):
+        '''
+        Will empty the list of previously created combinations
+        :return: None
+        '''
+        self.generated_combinations = set()
+        self.varified_words = []
 
 
 # making sure words are being loaded correctly
 wordfinder = WordFinder()
 wordfinder.load_words()
 
-wordfinder.generate_combo([]) # Output: [] --> empty list
-wordfinder.generate_combo(['A']) # Output: ['A'] --> single Value
+# TESTING SUITE
+wordfinder.generate_combo([]) # Output: empty set
+wordfinder.reset_generation()
+
+wordfinder.generate_combo(['A']) # Output: {'A'} --> single Value
+wordfinder.reset_generation()
+
 wordfinder.generate_combo(['A', 'G', 'L', 'P']) # multiple Values/long input
-wordfinder.generate_combo(['A', 'A']) # Output: ['A', 'AA'] --> Repeated letters will create duplicate combos that the set should remove
-wordfinder.generate_combo(['c', 'A', 'T']) # Output: ['CAT', 'ACT',...] --> case sensitivity, 'c' should be caplitalized
-wordfinder.generate_combo(['A', '1', '?']) # Different Characters--> special character(s) used for wild cards later
+wordfinder.reset_generation()
+
+wordfinder.generate_combo(['A', 'A']) # Output: {'A', 'AA'} --> Repeated letters will create duplicate combos that the set should remove
+wordfinder.reset_generation()
+
+wordfinder.generate_combo(['c', 'A', 'T']) # Output: {'CAT', 'ACT',...} --> case sensitivity, 'c' should be caplitalized
+wordfinder.reset_generation()
+
+wordfinder.generate_combo(['A', '1', '?']) # Different Characters--> special character(s) used for wild cards laterwordfinder.reset_generation()
+wordfinder.reset_generation()
