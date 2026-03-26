@@ -13,12 +13,13 @@ Use a set for the generated possible combinations, because a set removes duplica
 '''
 
 from dictionary_manager import DictionaryManager
+import math # comb
 
 class WordFinder:
     def __init__(self):
         self.dictionary_words = None
         self.generated_combinations = set()
-
+        self.num_combos = 0
         self.varified_words = []
 
         self.load_words()
@@ -26,7 +27,7 @@ class WordFinder:
     def load_words(self):
         self.dict_manager = DictionaryManager()
         self.dictionary_words = self.dict_manager.get_word_list()
-        print(self.dictionary_words)
+        # print(self.dictionary_words)
 
     def generate_combo(self, tiles:list):
         '''
@@ -42,7 +43,11 @@ class WordFinder:
         self.combo_building("", tiles)
 
         # Output all generated combinations
-        print(self.generated_combinations)
+        #print(self.generated_combinations)
+
+        #print(len(self.generated_combinations))
+
+        self.num_combos = len(self.generated_combinations)
 
     def combo_building(self, current_combo, remaining_tiles:list):
         '''
@@ -89,26 +94,48 @@ class WordFinder:
         self.generated_combinations = set()
         self.varified_words = []
 
+    def calc_num_combos(self, tiles):
+        sum = 0
+        n = len(tiles)
+        self.generate_combo(tiles)
+
+        for i in range(1, n+1):
+            sum+= math.comb(n, i)*math.factorial(i)
+
+        if self.num_combos == sum:
+            print(True)
+        else:
+            print(False)
+
 
 # making sure words are being loaded correctly
 wordfinder = WordFinder()
 wordfinder.load_words()
 
 # TESTING SUITE
-wordfinder.generate_combo([]) # Output: empty set
+'''wordfinder.generate_combo([]) # Output: empty set
 wordfinder.reset_generation()
 
 wordfinder.generate_combo(['A']) # Output: {'A'} --> single Value
+wordfinder.reset_generation()'''
+
+print("Testing 4 distinct: ", end="")
+wordfinder.calc_num_combos(['A', 'G', 'L', 'P']) # multiple Values
 wordfinder.reset_generation()
 
-wordfinder.generate_combo(['A', 'G', 'L', 'P']) # multiple Values/long input
+wordfinder.calc_num_combos(['A', 'A']) # Output: {'A', 'AA'} --> Repeated letters will create duplicate combos that the set should remove
 wordfinder.reset_generation()
+
+'''wordfinder.generate_combo(['A', ''])
 
 wordfinder.generate_combo(['A', 'A']) # Output: {'A', 'AA'} --> Repeated letters will create duplicate combos that the set should remove
+wordfinder.reset_generation()
+
+wordfinder.generate_combo(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L'])
 wordfinder.reset_generation()
 
 wordfinder.generate_combo(['c', 'A', 'T']) # Output: {'CAT', 'ACT',...} --> case sensitivity, 'c' should be caplitalized
 wordfinder.reset_generation()
 
 wordfinder.generate_combo(['A', '1', '?']) # Different Characters--> special character(s) used for wild cards laterwordfinder.reset_generation()
-wordfinder.reset_generation()
+wordfinder.reset_generation()'''

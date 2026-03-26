@@ -27,4 +27,4 @@ class DictionaryManager:
         return self.word_list
 
 dictionarymanager = DictionaryManager()
-print(dictionarymanager.get_word_list())
+#print(dictionarymanager.get_word_list())
