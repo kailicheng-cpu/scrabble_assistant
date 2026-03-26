@@ -14,6 +14,7 @@ Use a set for the generated possible combinations, because a set removes duplica
 
 from dictionary_manager import DictionaryManager
 import math # comb
+import time
 
 class WordFinder:
     def __init__(self):
@@ -95,6 +96,8 @@ class WordFinder:
         self.varified_words = []
 
     def calc_num_combos(self, tiles):
+        self.reset_generation()
+
         sum = 0
         n = len(tiles)
         self.generate_combo(tiles)
@@ -106,6 +109,16 @@ class WordFinder:
             print(True)
         else:
             print(False)
+
+    def stress_test(self, tiles):
+        self.reset_generation()
+
+        start_time = time.perf_counter()
+        self.generate_combo(tiles)
+        end_time = time.perf_counter()
+
+        runtime = end_time - start_time
+        print(runtime)
 
 
 # making sure words are being loaded correctly
@@ -120,11 +133,15 @@ wordfinder.generate_combo(['A']) # Output: {'A'} --> single Value
 wordfinder.reset_generation()'''
 
 print("Testing 4 distinct: ", end="")
-wordfinder.calc_num_combos(['A', 'G', 'L', 'P']) # multiple Values
-wordfinder.reset_generation()
+wordfinder.calc_num_combos(['A', 'G', 'L', 'P'])# multiple distinct Values
 
-wordfinder.calc_num_combos(['A', 'A']) # Output: {'A', 'AA'} --> Repeated letters will create duplicate combos that the set should remove
-wordfinder.reset_generation()
+# starts to slow down extreme at 10 tiles, 11 take too long 3.5min to run, therefore max characters of 10
+'''print("Testing runtime for 11 tiles")
+wordfinder.stress_test(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L', 'B', 'M', '*','N']) 
+wordfinder.reset_generation()'''
+
+#wordfinder.calc_num_combos(['A', 'A']) # Output: {'A', 'AA'} --> Repeated letters will create duplicate combos that the set should remove
+#wordfinder.reset_generation()
 
 '''wordfinder.generate_combo(['A', ''])
 
