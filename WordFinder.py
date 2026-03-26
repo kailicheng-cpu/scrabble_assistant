@@ -135,7 +135,11 @@ wordfinder.reset_generation()'''
 print("Testing 4 distinct: ", end="")
 wordfinder.calc_num_combos(['A', 'G', 'L', 'P'])# multiple distinct Values
 
-# starts to slow down extreme at 10 tiles, 11 take too long 3.5min to run, therefore max characters of 10
+print("Testing runtime for 10 tiles")
+wordfinder.stress_test(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L', 'B', 'M','N']) # starts to slow down extreme at 10 tiles
+wordfinder.reset_generation()
+
+# 11 take too long 3.5min to run, therefore max characters of 10
 '''print("Testing runtime for 11 tiles")
 wordfinder.stress_test(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L', 'B', 'M', '*','N']) 
 wordfinder.reset_generation()'''
