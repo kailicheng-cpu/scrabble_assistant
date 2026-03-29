@@ -70,7 +70,7 @@ class WordVerifications:
                     high = mid - 1
                 else:
                     low = mid + 1 # Search right half
-        print(self.verified)
+        #print(self.verified)
         return self.verified
 
     def get_word(self):
