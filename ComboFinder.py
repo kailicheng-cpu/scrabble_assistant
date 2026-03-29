@@ -16,7 +16,7 @@ from dictionary_manager import DictionaryManager
 import math # comb
 import time
 
-class WordFinder:
+class ComboFinder:
     def __init__(self):
         self.dictionary_words = None
         self.generated_combinations = set()
@@ -151,8 +151,8 @@ class WordFinder:
 
 
 # making sure words are being loaded correctly
-wordfinder = WordFinder()
-wordfinder.load_words()
+combofinder = ComboFinder()
+combofinder.load_words()
 
 # TESTING SUITE
 '''wordfinder.generate_combo([]) # Output: empty set
@@ -162,28 +162,28 @@ wordfinder.generate_combo(['A']) # Output: {'A'} --> single Value
 wordfinder.reset_generation()'''
 
 print("Testing 4 distinct: ", end="")
-wordfinder.calc_num_combos(['A', 'G', 'L', 'P'])# multiple distinct Values
+combofinder.calc_num_combos(['A', 'G', 'L', 'P'])# multiple distinct Values
 
 print("Testing 10 distinct: ", end="")
-wordfinder.calc_num_combos(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L', 'B', 'M','N'])
+combofinder.calc_num_combos(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L', 'B', 'M', 'N'])
 
 print("Testing 2 duplicate Values: ", end="")
-wordfinder.num_combos_duplicate(['A', 'A']) # Output: True --> 2 < 4 {'A', 'AA'} --> Repeated letters will create duplicate combos that the set should remove
+combofinder.num_combos_duplicate(['A', 'A']) # Output: True --> 2 < 4 {'A', 'AA'} --> Repeated letters will create duplicate combos that the set should remove
 
 print("Testing duplicates with multiple values: ", end="")
-wordfinder.num_combos_duplicate(['C', 'A' , 'T', 'Z', 'P', 'Q', 'B', 'B', 'N','N'])
+combofinder.num_combos_duplicate(['C', 'A' , 'T', 'Z', 'P', 'Q', 'B', 'B', 'N', 'N'])
 
 print("Testing Case Sensitivity: ", end="")
-wordfinder.case_sensitivity(['c', 'A', 'T']) # Output: True -->{'CAT', 'ACT',...} --> case sensitivity, 'c' should be caplitalized
-wordfinder.reset_generation()
+combofinder.case_sensitivity(['c', 'A', 'T']) # Output: True -->{'CAT', 'ACT',...} --> case sensitivity, 'c' should be caplitalized
+combofinder.reset_generation()
 
 # Different Characters--> special character(s) used for wild cards later
 print("Testing Special Characters: ", end="")
-wordfinder.generate_combo(['A', '1', '?']) # Just making sure it works the same with special characters
-print(wordfinder.generated_combinations)
+combofinder.generate_combo(['A', '1', '?']) # Just making sure it works the same with special characters
+print(combofinder.generated_combinations)
 
 print("Testing runtime for 10 tiles: ", end="")
-wordfinder.stress_test(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L', 'B', 'M','N']) # starts to slow down extreme at 10 tiles
+combofinder.stress_test(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L', 'B', 'M', 'N']) # starts to slow down extreme at 10 tiles
 
 # 11 take too long 3.5min to run, therefore max characters of 10
 '''print("Testing runtime for 11 tiles")

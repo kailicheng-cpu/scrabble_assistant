@@ -1,4 +1,4 @@
-from WordFinder import WordFinder
+from ComboFinder import ComboFinder
 import pytest
 import math
 
@@ -12,7 +12,7 @@ class test_combotesting:
         print(sum)
 
     def test_word_finder(self):
-        wf = WordFinder()
+        wf = ComboFinder()
         tiles = ["A", "B", "C", "D"]
         result = wf.generate_combo(tiles)
 
