@@ -95,6 +95,9 @@ class WordFinder:
         self.generated_combinations = set()
         self.varified_words = []
 
+
+# ------------------------ Testing ------------------------
+
     def calc_num_combos(self, tiles):
         self.reset_generation()
 
@@ -110,6 +113,21 @@ class WordFinder:
         else:
             print(False)
 
+    def num_combos_duplicate(self, tiles):
+        self.reset_generation()
+
+        sum = 0
+        n = len(tiles)
+        self.generate_combo(tiles)
+
+        for i in range(1, n + 1):
+            sum += math.comb(n, i) * math.factorial(i)
+
+        if self.num_combos < sum:
+            print(True)
+        else:
+            print(False)
+
     def stress_test(self, tiles):
         self.reset_generation()
 
@@ -119,6 +137,17 @@ class WordFinder:
 
         runtime = end_time - start_time
         print(runtime)
+
+    def case_sensitivity(self, tiles):
+        self.reset_generation()
+
+        self.generate_combo(tiles)
+
+        for i in self.generated_combinations:
+            if not i.isupper():
+                print(False)
+                return
+        print(True)
 
 
 # making sure words are being loaded correctly
@@ -135,28 +164,22 @@ wordfinder.reset_generation()'''
 print("Testing 4 distinct: ", end="")
 wordfinder.calc_num_combos(['A', 'G', 'L', 'P'])# multiple distinct Values
 
-print("Testing runtime for 10 tiles")
-wordfinder.stress_test(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L', 'B', 'M','N']) # starts to slow down extreme at 10 tiles
+print("Testing 2 duplicate Values: ", end="")
+wordfinder.num_combos_duplicate(['A', 'A']) # Output: True --> 2 < 4 {'A', 'AA'} --> Repeated letters will create duplicate combos that the set should remove
+
+print("Testing Case Sensitivity: ", end="")
+wordfinder.case_sensitivity(['c', 'A', 'T']) # Output: True -->{'CAT', 'ACT',...} --> case sensitivity, 'c' should be caplitalized
 wordfinder.reset_generation()
+
+# Different Characters--> special character(s) used for wild cards later
+print("Testing Special Characters: ", end="")
+wordfinder.generate_combo(['A', '1', '?']) # Just making sure it works the same with special characters
+print(wordfinder.generated_combinations)
+
+print("Testing runtime for 10 tiles: ", end="")
+wordfinder.stress_test(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L', 'B', 'M','N']) # starts to slow down extreme at 10 tiles
 
 # 11 take too long 3.5min to run, therefore max characters of 10
 '''print("Testing runtime for 11 tiles")
 wordfinder.stress_test(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L', 'B', 'M', '*','N']) 
-wordfinder.reset_generation()'''
-
-#wordfinder.calc_num_combos(['A', 'A']) # Output: {'A', 'AA'} --> Repeated letters will create duplicate combos that the set should remove
-#wordfinder.reset_generation()
-
-'''wordfinder.generate_combo(['A', ''])
-
-wordfinder.generate_combo(['A', 'A']) # Output: {'A', 'AA'} --> Repeated letters will create duplicate combos that the set should remove
-wordfinder.reset_generation()
-
-wordfinder.generate_combo(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L'])
-wordfinder.reset_generation()
-
-wordfinder.generate_combo(['c', 'A', 'T']) # Output: {'CAT', 'ACT',...} --> case sensitivity, 'c' should be caplitalized
-wordfinder.reset_generation()
-
-wordfinder.generate_combo(['A', '1', '?']) # Different Characters--> special character(s) used for wild cards laterwordfinder.reset_generation()
 wordfinder.reset_generation()'''
