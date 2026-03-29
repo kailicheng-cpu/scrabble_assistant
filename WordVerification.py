@@ -71,6 +71,9 @@ class WordVerifications:
         print(self.verified)
         return self.verified
 
+    def get_word(self):
+        return(self.verified)
+
 if __name__ == "__main__":      # So that it won’t run when the file is imported
     CF = ComboFinder()
     CF.generate_combo(['C', 'A' , 'T']) # --> minimum 2 letter words --> Output: ['ACT', 'AT', 'CAT', 'TA']
