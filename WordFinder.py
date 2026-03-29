@@ -164,8 +164,14 @@ wordfinder.reset_generation()'''
 print("Testing 4 distinct: ", end="")
 wordfinder.calc_num_combos(['A', 'G', 'L', 'P'])# multiple distinct Values
 
+print("Testing 10 distinct: ", end="")
+wordfinder.calc_num_combos(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L', 'B', 'M','N'])
+
 print("Testing 2 duplicate Values: ", end="")
 wordfinder.num_combos_duplicate(['A', 'A']) # Output: True --> 2 < 4 {'A', 'AA'} --> Repeated letters will create duplicate combos that the set should remove
+
+print("Testing duplicates with multiple values: ", end="")
+wordfinder.num_combos_duplicate(['C', 'A' , 'T', 'Z', 'P', 'Q', 'B', 'B', 'N','N'])
 
 print("Testing Case Sensitivity: ", end="")
 wordfinder.case_sensitivity(['c', 'A', 'T']) # Output: True -->{'CAT', 'ACT',...} --> case sensitivity, 'c' should be caplitalized
