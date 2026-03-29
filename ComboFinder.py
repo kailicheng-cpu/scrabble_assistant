@@ -156,38 +156,39 @@ class ComboFinder:
 combofinder = ComboFinder()
 combofinder.load_words()
 
+if __name__ == "__main__":      # So that it won’t run when the file is imported
 # TESTING SUITE
-'''wordfinder.generate_combo([]) # Output: empty set
-wordfinder.reset_generation()
+    '''wordfinder.generate_combo([]) # Output: empty set
+    wordfinder.reset_generation()
+    
+    wordfinder.generate_combo(['A']) # Output: {'A'} --> single Value
+    wordfinder.reset_generation()'''
 
-wordfinder.generate_combo(['A']) # Output: {'A'} --> single Value
-wordfinder.reset_generation()'''
+    print("Testing 4 distinct: ", end="")
+    combofinder.calc_num_combos(['A', 'G', 'L', 'P'])# multiple distinct Values
 
-print("Testing 4 distinct: ", end="")
-combofinder.calc_num_combos(['A', 'G', 'L', 'P'])# multiple distinct Values
+    print("Testing 10 distinct: ", end="")
+    combofinder.calc_num_combos(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L', 'B', 'M', 'N'])
 
-print("Testing 10 distinct: ", end="")
-combofinder.calc_num_combos(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L', 'B', 'M', 'N'])
+    print("Testing 2 duplicate Values: ", end="")
+    combofinder.num_combos_duplicate(['A', 'A']) # Output: True --> 2 < 4 {'A', 'AA'} --> Repeated letters will create duplicate combos that the set should remove
 
-print("Testing 2 duplicate Values: ", end="")
-combofinder.num_combos_duplicate(['A', 'A']) # Output: True --> 2 < 4 {'A', 'AA'} --> Repeated letters will create duplicate combos that the set should remove
+    print("Testing duplicates with multiple values: ", end="")
+    combofinder.num_combos_duplicate(['C', 'A' , 'T', 'Z', 'P', 'Q', 'B', 'B', 'N', 'N'])
 
-print("Testing duplicates with multiple values: ", end="")
-combofinder.num_combos_duplicate(['C', 'A' , 'T', 'Z', 'P', 'Q', 'B', 'B', 'N', 'N'])
+    print("Testing Case Sensitivity: ", end="")
+    combofinder.case_sensitivity(['c', 'A', 'T']) # Output: True -->{'CAT', 'ACT',...} --> case sensitivity, 'c' should be caplitalized
+    combofinder.reset_generation()
 
-print("Testing Case Sensitivity: ", end="")
-combofinder.case_sensitivity(['c', 'A', 'T']) # Output: True -->{'CAT', 'ACT',...} --> case sensitivity, 'c' should be caplitalized
-combofinder.reset_generation()
+    # Different Characters--> special character(s) used for wild cards later
+    print("Testing Special Characters: ", end="")
+    combofinder.generate_combo(['A', '1', '?']) # Just making sure it works the same with special characters
+    print(combofinder.generated_combinations)
 
-# Different Characters--> special character(s) used for wild cards later
-print("Testing Special Characters: ", end="")
-combofinder.generate_combo(['A', '1', '?']) # Just making sure it works the same with special characters
-print(combofinder.generated_combinations)
+    print("Testing runtime for 10 tiles: ", end="")
+    combofinder.stress_test(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L', 'B', 'M', 'N']) # starts to slow down extreme at 10 tiles
 
-print("Testing runtime for 10 tiles: ", end="")
-combofinder.stress_test(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L', 'B', 'M', 'N']) # starts to slow down extreme at 10 tiles
-
-# 11 take too long 3.5min to run, therefore max characters of 10
-'''print("Testing runtime for 11 tiles")
-wordfinder.stress_test(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L', 'B', 'M', '*','N']) 
-wordfinder.reset_generation()'''
+    # 11 take too long 3.5min to run, therefore max characters of 10
+    '''print("Testing runtime for 11 tiles")
+    wordfinder.stress_test(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L', 'B', 'M', '*','N']) 
+    wordfinder.reset_generation()'''
