@@ -39,6 +39,8 @@ class WordGenerator:
         #score will return a dictionary
         self.score = self.WS.calc_score(self.words)
 
+        #return self.words, self.score
+
     def get_words(self):
         """
         Return the list of valid words generated.
