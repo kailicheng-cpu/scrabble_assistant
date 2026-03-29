@@ -19,7 +19,7 @@ class WordGenerator:
         self.words = self.WV.validate_word(self.CF.get_generated_combos())
 
         # Calculated and get score for words
-
+        #score will return a dictionary
         return self.words
 
     def reset(self):
