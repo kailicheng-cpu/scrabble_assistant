@@ -1,6 +1,6 @@
 
-from dictionary_manager import DictionaryManager
-from
+from DictionaryManager import DictionaryManager
+from ComboFinder import
 
 class WordVerification:
     def __init__(self):

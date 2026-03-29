@@ -12,7 +12,7 @@ Note:
 Use a set for the generated possible combinations, because a set removes duplicate combination of letters
 '''
 
-from dictionary_manager import DictionaryManager
+from DictionaryManager import DictionaryManager
 import math # comb
 import time
 
