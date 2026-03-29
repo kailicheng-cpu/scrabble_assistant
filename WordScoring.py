@@ -43,5 +43,6 @@ class WordScoring:
     def reset(self):
         self.word_scores = {}
 
-WS = WordScoring()
-print(WS.calc_score(['CAT', 'TAB', 'BUZZ']))
+if __name__ == "__main__":      # So that it won’t run when the file is imported
+    WS = WordScoring()
+    print(WS.calc_score(['CAT', 'TAB', 'BUZZ']))
