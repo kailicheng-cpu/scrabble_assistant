@@ -95,6 +95,8 @@ class ComboFinder:
         self.generated_combinations = set()
         self.varified_words = []
 
+    def get_generated_combos(self):
+        return self.generated_combinations
 
 # ------------------------ Testing ------------------------
 
