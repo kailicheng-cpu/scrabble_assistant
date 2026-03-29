@@ -15,6 +15,7 @@ Use a set for the generated possible combinations, because a set removes duplica
 from DictionaryManager import DictionaryManager
 import math # comb
 import time
+import string
 
 class ComboFinder:
     def __init__(self):
@@ -22,6 +23,7 @@ class ComboFinder:
         self.generated_combinations = set()
         self.num_combos = 0
         self.varified_words = []
+        self.alphabet = list(string.ascii_uppercase)
 
         self.load_words()
 
@@ -77,6 +79,14 @@ class ComboFinder:
             # Choose a letter at index i
             letter = remaining_tiles[i]
             #print(letter) # debugging: shows which letter is chosen--> based on i (the for loop)
+            if letter == '*':
+                for j in range(len(self.alphabet)):
+                    replacement = self.alphabet[j]
+
+                    new_combo = current_combo + replacement
+                    new_remainder = remaining_tiles[:i] + remaining_tiles[i + 1:]
+                    self.combo_building(new_combo, new_remainder)
+                continue
 
             # Build a new combination by adding the chosen letter
             new_combo = current_combo + letter
@@ -165,6 +175,9 @@ if __name__ == "__main__":      # So that it won’t run when the file is import
     
     wordfinder.generate_combo(['A']) # Output: {'A'} --> single Value
     wordfinder.reset_generation()'''
+
+    combofinder.generate_combo(['C', 'A', '*'])
+    #print(combofinder.get_generated_combos()) Testing to make sure wild card converts to different letters of the alphabet
 
     print("Testing 4 distinct: ", end="")
     combofinder.calc_num_combos(['A', 'G', 'L', 'P'])# multiple distinct Values
