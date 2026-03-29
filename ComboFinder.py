@@ -26,6 +26,8 @@ class ComboFinder:
         self.load_words()
 
     def load_words(self):
+        '''Load the word list from DictionaryManager.'''
+
         self.dict_manager = DictionaryManager()
         self.dictionary_words = self.dict_manager.get_word_list()
         # print(self.dictionary_words)
