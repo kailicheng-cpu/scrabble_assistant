@@ -82,6 +82,9 @@ class WordVerifications:
     def reset(self):
         self.verified = []
 
+    def some_valid(self):
+        
+
     def stress_test(self, combos):
 
         start_time = time.perf_counter()
@@ -99,4 +102,14 @@ if __name__ == "__main__":      # So that it won’t run when the file is import
     WV = WordVerifications()
     WV.validate_word(CF.get_generated_combos())
 
-    CF.generate_combo()
+    print("Testing runtime for all combinations made with 9 tiles: ")
+    combos = CF.generate_combo(['C', 'A', 'T', 'Z', 'P', 'Q', 'L', 'B', 'M'])
+    # print(CF.get_generated_combos())
+    print('Validating Words...')
+    WV.stress_test(CF.get_generated_combos())
+
+    print("Testing runtime for all combinations made with 10 tiles: ")
+    combos = CF.generate_combo(['C', 'A' , 'T', 'Z', 'P', 'Q', 'L', 'B', 'M', 'N'])
+    #print(CF.get_generated_combos())
+    print('Validating Words...')
+    WV.stress_test(CF.get_generated_combos())
