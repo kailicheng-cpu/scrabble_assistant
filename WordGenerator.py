@@ -30,10 +30,10 @@ class WordGenerator:
         self.reset()
 
         # make Combos-->Generate all possible letter combinations from tiles
-        self.CF.generate_combo(tiles)
+        combos = self.CF.generate_combo(tiles)
 
         # verify Combos for words-->Validate which combinations are actual words
-        self.words = self.WV.validate_word(self.CF.get_generated_combos())
+        self.words = self.WV.validate_word(combos)
 
         # Calculate Scrabble scores for valid words
         #score will return a dictionary
@@ -61,10 +61,8 @@ class WordGenerator:
         """
         self.words = None
         self.score = None
-        self.CF.reset_generation()
-        self.WV.reset()
-        self.WS.reset()
 
 WG = WordGenerator()
 WG.doaction(['C', 'A', 'T'])
+WG.doaction(['L', 'A', 'K', 'E'])
 print(WG.get_words(), ', ', WG.get_score())

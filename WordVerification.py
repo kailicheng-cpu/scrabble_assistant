@@ -18,6 +18,7 @@
 '''
 from DictionaryManager import DictionaryManager
 from ComboFinder import ComboFinder
+import time
 
 class WordVerifications:
     """
@@ -51,6 +52,8 @@ class WordVerifications:
         :return: list
             List of verified words found in the dictionary.
         """
+        self.reset()
+
         generatedcombos = list(generatedcombos)
 
         self.sort_words(generatedcombos)
@@ -58,7 +61,7 @@ class WordVerifications:
         combos = self.dictionary_words # Search against the official dictionary
 
         for i in generatedcombos:
-            high = len(combos) + 1 # Corrected binary search upper bound
+            high = len(combos) - 1 # Corrected binary search upper bound
             low = 0
 
             while high >= low:
@@ -79,6 +82,15 @@ class WordVerifications:
     def reset(self):
         self.verified = []
 
+    def stress_test(self, combos):
+
+        start_time = time.perf_counter()
+        self.validate_word(combos)
+        end_time = time.perf_counter()
+
+        runtime = end_time - start_time
+        print(runtime)
+
 if __name__ == "__main__":      # So that it won’t run when the file is imported
     CF = ComboFinder()
     CF.generate_combo(['C', 'A' , 'T']) # --> minimum 2 letter words --> Output: ['ACT', 'AT', 'CAT', 'TA']
@@ -86,3 +98,5 @@ if __name__ == "__main__":      # So that it won’t run when the file is import
 
     WV = WordVerifications()
     WV.validate_word(CF.get_generated_combos())
+
+    CF.generate_combo()

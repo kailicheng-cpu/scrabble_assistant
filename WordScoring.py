@@ -30,6 +30,7 @@ class WordScoring:
             WS.calc_score(['CAT', 'TAB', 'BUZZ'])
             Output: {'CAT': 5, 'TAB': 5, 'BUZZ': 28}
         """
+        self.reset()
         for word in words:
             score = 0
 

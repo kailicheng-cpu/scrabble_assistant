@@ -41,6 +41,8 @@ class ComboFinder:
             players tiles/letters that they want to create words using
         :return: None
         '''
+        self.reset_generation()
+
         for t in range(len(tiles)):
             tiles[t] = tiles[t].upper()
 
@@ -53,6 +55,8 @@ class ComboFinder:
         #print(len(self.generated_combinations))
 
         self.num_combos = len(self.generated_combinations)
+
+        return self.generated_combinations
 
     def combo_building(self, current_combo, remaining_tiles:list):
         '''
@@ -113,7 +117,7 @@ class ComboFinder:
 # ------------------------ Testing ------------------------
 
     def calc_num_combos(self, tiles):
-        self.reset_generation()
+        #self.reset_generation()
 
         sum = 0
         n = len(tiles)
@@ -128,7 +132,7 @@ class ComboFinder:
             print(False)
 
     def num_combos_duplicate(self, tiles):
-        self.reset_generation()
+        #self.reset_generation()
 
         sum = 0
         n = len(tiles)
@@ -143,7 +147,7 @@ class ComboFinder:
             print(False)
 
     def stress_test(self, tiles):
-        self.reset_generation()
+        #self.reset_generation()
 
         start_time = time.perf_counter()
         self.generate_combo(tiles)
@@ -153,7 +157,7 @@ class ComboFinder:
         print(runtime)
 
     def case_sensitivity(self, tiles):
-        self.reset_generation()
+        #self.reset_generation()
 
         self.generate_combo(tiles)
 
