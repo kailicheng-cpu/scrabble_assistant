@@ -82,8 +82,63 @@ class WordVerifications:
     def reset(self):
         self.verified = []
 
+# ------------------------ Testing ------------------------
+
     def some_valid(self):
-        
+        word = ['CAT', 'ACT', 'C']
+        valid = ['ACT', 'CAT']
+
+        checked = self.validate_word(word)
+        checked.sort()
+
+        #print(checked)
+
+        if valid == checked:
+            return True
+
+        return False
+
+    def all_valid(self):
+        word = ['CAT', 'ACT', 'AT']
+        valid = ['ACT', 'AT', 'CAT']
+
+        checked = self.validate_word(word)
+        checked.sort()
+
+        #print(checked)
+
+        if valid == checked:
+            return True
+
+        return False
+
+    def none_valid(self):
+        word = ['PZS', 'YPC', 'AV']
+        valid = []
+
+        checked = self.validate_word(word)
+        checked.sort()
+
+        #print(checked)
+
+        if valid == checked:
+            return True
+
+        return False
+
+    def no_words(self):
+        word = []
+        valid = []
+
+        checked = self.validate_word(word)
+        checked.sort()
+
+        # print(checked)
+
+        if valid == checked:
+            return True
+
+        return False
 
     def stress_test(self, combos):
 
@@ -95,12 +150,26 @@ class WordVerifications:
         print(runtime)
 
 if __name__ == "__main__":      # So that it won’t run when the file is imported
+
+# TESTING SUITE
     CF = ComboFinder()
     CF.generate_combo(['C', 'A' , 'T']) # --> minimum 2 letter words --> Output: ['ACT', 'AT', 'CAT', 'TA']
     print(CF.get_generated_combos())
 
     WV = WordVerifications()
-    WV.validate_word(CF.get_generated_combos())
+    print(WV.validate_word(CF.get_generated_combos()))
+
+    print("Testing some valid and invalid words: ", end="")
+    print(WV.some_valid())
+
+    print("Testing all valid words: ", end="")
+    print(WV.all_valid())
+
+    print("Testing no valid words: ", end="")
+    print(WV.none_valid())
+
+    print("Testing no words: ", end="")
+    print(WV.no_words())
 
     print("Testing runtime for all combinations made with 9 tiles: ")
     combos = CF.generate_combo(['C', 'A', 'T', 'Z', 'P', 'Q', 'L', 'B', 'M'])
