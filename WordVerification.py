@@ -58,6 +58,9 @@ class WordVerifications:
 
         self.sort_words(generatedcombos)
 
+        for i in range(len(generatedcombos)):
+            generatedcombos[i] = generatedcombos[i].upper()
+
         combos = self.dictionary_words # Search against the official dictionary
 
         for i in generatedcombos:
@@ -149,6 +152,17 @@ class WordVerifications:
         runtime = end_time - start_time
         print(runtime)
 
+    def case_sensitivity(self):
+        words = ['cat', 'mat']
+
+        check = self.validate_word(words)
+
+        for word in check:
+            if not word.isupper():
+                return False
+        return True
+
+
 if __name__ == "__main__":      # So that it won’t run when the file is imported
 
 # TESTING SUITE
@@ -158,6 +172,9 @@ if __name__ == "__main__":      # So that it won’t run when the file is import
 
     WV = WordVerifications()
     print(WV.validate_word(CF.get_generated_combos()))
+
+    print("Testing case sensitivity: ", end="")
+    print(WV.case_sensitivity())
 
     print("Testing some valid and invalid words: ", end="")
     print(WV.some_valid())
