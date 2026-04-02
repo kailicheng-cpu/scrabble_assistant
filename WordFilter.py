@@ -16,6 +16,7 @@ class WordFilter:
         self.all_word = self.word_gen_class.get_words()
         #print(self.all_word)
         self.all_scores = self.word_gen_class.get_score()
+        #print(self.all_scores)
         self.filtered_word = []
         self.filtered_score = {}
 
