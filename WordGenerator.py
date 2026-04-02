@@ -39,7 +39,7 @@ class WordGenerator:
         #score will return a dictionary
         self.score = self.WS.calc_score(self.words)
 
-        #return self.words, self.score
+        return self.words, self.score
 
     def get_words(self):
         """
@@ -62,7 +62,9 @@ class WordGenerator:
         self.words = None
         self.score = None
 
-WG = WordGenerator()
-WG.doaction(['C', 'A', 'T'])
-WG.doaction(['L', 'A', 'K', 'E'])
-print(WG.get_words(), ', ', WG.get_score())
+if __name__ == "__main__":
+    WG = WordGenerator()
+    WG.doaction(['C', 'A', 'T'])
+    word, score = WG.doaction(['L', 'A', 'K', 'E'])
+    print(word, ', ', score)
+    #print(WG.get_words(), ', ', WG.get_score())
