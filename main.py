@@ -9,15 +9,14 @@ root = tk.Tk()
 root.geometry("1400x800")
 
 # Create frames
-# create frame4 first (since nothing depends on it)
 frame4 = create_frame4(root, show_frame, None)
 
-frame3, letterN_filter, letter_filter, words_text, score_text = create_frame3(root, frame2=None)
+frame3, letterN_filter, letter_filter, words_text, score_list = create_frame3(root, frame2=None)
 
-# 2. Pass words_text to frame2
-frame2, enter_text, solve_button = create_frame2(root, show_frame, frame3, frame4, words_text)
+# Pass words_text to frame2
+frame2, enter_text, score_text = create_frame2(root, show_frame, frame3, frame4, words_text, score_list)
 
-# finally frame1 (needs frame2)
+# frame 1
 frame1 = create_frame1(root, show_frame, frame2)
 
 

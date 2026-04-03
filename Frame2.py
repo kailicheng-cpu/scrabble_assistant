@@ -4,7 +4,7 @@ from WordGenerator import WordGenerator
 
 generator = WordGenerator()
 
-def create_frame2(root, show_frame_func, frame3, frame4, words_text):
+def create_frame2(root, show_frame_func, frame3, frame4, words_text, score_list):
     frame2 = tk.Frame(root, bg="lightblue")
     frame2.place(relx=0, rely=0, relwidth=1, relheight=1)
 
@@ -26,7 +26,7 @@ def create_frame2(root, show_frame_func, frame3, frame4, words_text):
     frame2,
     text="Solve",
     font=("Courier", 50, "bold"),
-    command=lambda: solve(frame3, enter_text.get(), words_text, generator)  # Run your solve function
+    command=lambda: solve(frame3, enter_text.get(), words_text, score_list, generator)  # Run your solve function
 )
     solve_button.place(x=500, y=400, width=300, height=100)
 

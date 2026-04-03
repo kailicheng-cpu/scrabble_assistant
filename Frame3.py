@@ -53,20 +53,20 @@ def create_frame3(root, frame2):
     words_text.place(x=50, y=130, width=300, height=635)
 
     # Score Text Box + Shared Scrollbar
-    score_text = tk.Text(frame3, font=("Courier", 20, "bold"), wrap="none", state="disabled")
-    score_scroll = tk.Scrollbar(frame3, command=lambda *args: (score_text.yview(*args), words_text.yview(*args)))
-    score_text.config(yscrollcommand=score_scroll.set)
+    score_list = tk.Text(frame3, font=("Courier", 20, "bold"), wrap="none", state="disabled")
+    score_scroll = tk.Scrollbar(frame3, command=lambda *args: (score_list.yview(*args), words_text.yview(*args)))
+    score_list.config(yscrollcommand=score_scroll.set)
     words_text.config(yscrollcommand=score_scroll.set)
-    score_text.place(x=420, y=130, width=300, height=635)
+    score_list.place(x=420, y=130, width=300, height=635)
     score_scroll.place(x=720, y=130, width=20, height=635)
 
     # Sync mouse wheel scrolling
     def on_mousewheel(event):
-        score_text.yview_scroll(int(-1*(event.delta/120)), "units")
+        score_list.yview_scroll(int(-1*(event.delta/120)), "units")
         words_text.yview_scroll(int(-1*(event.delta/120)), "units")
         return "break"
 
-    score_text.bind("<MouseWheel>", on_mousewheel)
+    score_list.bind("<MouseWheel>", on_mousewheel)
     words_text.bind("<MouseWheel>", on_mousewheel)
 
-    return frame3, letterN_filter, letter_filter, words_text, score_text
+    return frame3, letterN_filter, letter_filter, words_text, score_list
