@@ -106,7 +106,7 @@ class WordFilter:
 
         :param letter: str
             The letter to search for in words
-            
+
         :return: tuple
             list of shortest words, dict of word:score
         """
