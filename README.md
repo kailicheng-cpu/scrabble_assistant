@@ -1,5 +1,5 @@
 # Scrabble Game Assistant
-___
+
 A Python-based tool that generates all possible letter combinations from a set of tiles and verifies them against a dictionary to find playable Scrabble words. The program uses a graphical user interface (GUI) for easy interaction and efficient gameplay assistance.
 
 ### How It Works:
@@ -10,7 +10,7 @@ A Python-based tool that generates all possible letter combinations from a set o
 - Filters can be applied to refine results (e.g., word length)
 
 ## Getting Started
-___
+
 ### Dependencies:
 - Python 3
 - Tkinter (built-in Python GUI library)
@@ -55,7 +55,7 @@ Output: ['ACT', 'AT', 'CAT']
 - Filters can be applied to refine the word selection
 
 ## Testing:
-___
+
 #### The program includes tests for:
 - Valid and invalid word detection
 - Edge cases, such as empty input or single letters
@@ -63,10 +63,10 @@ ___
 - Runtime is measured to ensure efficiency
 
 ## Future Improvements:
-___
+
 - Optimize combination generation further for more efficient and faster runtime
 
 ## Contributers:
-___
+
 Kaili Cheng  
 Finlay Spratt
