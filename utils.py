@@ -17,3 +17,23 @@ def validate_single_digit(P):
 
 def letters_or_wild(P):
     return len(P) <= 10 and all(c.isalpha() or c == '*' for c in P)
+
+def solve(frame3, tiles, words_text, generator):
+    # 1. Generate valid words and scores
+    valid_words, scores = generator.doaction(list(tiles))
+    
+    # 2. Store them in the generator so other frames can access
+    generator.words = valid_words
+    generator.score = scores
+
+    print("solve")
+    
+    # 3. Raise frame3
+    frame3.tkraise()
+    
+    # 4. Update the words_text box in frame3
+    words_text.config(state="normal")
+    words_text.delete("1.0", "end")  # clear old words
+    for word in generator.words:
+        words_text.insert("end", word + "\n")
+    words_text.config(state="disabled")

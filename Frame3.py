@@ -5,6 +5,11 @@ def create_frame3(root, frame2):
     frame3 = tk.Frame(root, bg="lightblue")
     frame3.place(relx=0, rely=0, relwidth=1, relheight=1)
 
+    frame3.valid_words = []
+
+    results_label = tk.Label(frame3, font=("Courier", 20))
+    results_label.pack()
+
     # Labels
     words_label = tk.Label(frame3, font=("Courier", 50), text="Words", bg="lightblue")
     words_label.place(x=50, y=30)
@@ -63,18 +68,5 @@ def create_frame3(root, frame2):
 
     score_text.bind("<MouseWheel>", on_mousewheel)
     words_text.bind("<MouseWheel>", on_mousewheel)
-
-    # Populate words
-    words_text.config(state="normal")
-    words = [
-        "apple", "banana", "cherry", "date", "elderberry", "fig", "grape", "honeydew",
-        "kiwi", "lemon", "mango", "nectarine", "orange", "papaya", "quince", "raspberry",
-        "strawberry", "tangerine", "ugli", "vanilla", "watermelon", "xigua", "yam",
-        "zucchini", "apricot", "blueberry", "cantaloupe", "dragonfruit", "grapefruit",
-        "jackfruit", "apple", "car", "pomello"
-    ]
-    for word in words:
-        words_text.insert("end", word + "\n")
-    words_text.config(state="disabled")
 
     return frame3, letterN_filter, letter_filter, words_text, score_text

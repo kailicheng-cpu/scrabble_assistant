@@ -1,7 +1,10 @@
 import tkinter as tk
-from utils import letters_or_wild, add_wild
+from utils import letters_or_wild, add_wild, solve
+from WordGenerator import WordGenerator
 
-def create_frame2(root, show_frame_func, frame3, frame4):
+generator = WordGenerator()
+
+def create_frame2(root, show_frame_func, frame3, frame4, words_text):
     frame2 = tk.Frame(root, bg="lightblue")
     frame2.place(relx=0, rely=0, relwidth=1, relheight=1)
 
@@ -19,7 +22,12 @@ def create_frame2(root, show_frame_func, frame3, frame4):
     enter_text = tk.Entry(frame2, font=("Courier", 60), validate='key', validatecommand=vcmd)
     enter_text.place(x=330, y=300, width=600, height=80)
 
-    solve_button = tk.Button(frame2, text="Solve", command=lambda: show_frame_func(frame3), font=("Courier", 50, "bold"))
+    solve_button = tk.Button(
+    frame2,
+    text="Solve",
+    font=("Courier", 50, "bold"),
+    command=lambda: solve(frame3, enter_text.get(), words_text, generator)  # Run your solve function
+)
     solve_button.place(x=500, y=400, width=300, height=100)
 
     test_button = tk.Button(frame2, text="Word Check", command=lambda: show_frame_func(frame4), font=("Courier", 50, "bold"))
