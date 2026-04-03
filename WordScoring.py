@@ -5,6 +5,7 @@
         score_system (dict): Maps lowercase letters to their Scrabble point values.
         word_scores (dict): Stores calculated scores for each word.
 """
+import time
 
 class WordScoring:
     def __init__(self):
@@ -44,6 +45,67 @@ class WordScoring:
     def reset(self):
         self.word_scores = {}
 
+    # 1. Test normal words
+    def test_normal_words(self):
+        words = ['CAT', 'TAB', 'BUZZ']
+        expected = {'CAT': 5, 'TAB': 5, 'BUZZ': 24}
+        result = self.calc_score(words)
+        print("Normal words test:", result)
+        return result == expected
+
+    # 2. Test case-insensitivity not needed as all words most likely will be uppercase, if not will be converted to lowercase
+
+    # 3. Test single-letter words
+    def test_single_letters(self):
+        words = ['A', 'Z', 'Q']
+        expected = {'A': 1, 'Z': 10, 'Q': 10}
+        result = self.calc_score(words)
+        #print("Single letters test:", result)
+        return result == expected
+
+    # 4. Test repeated letters
+    def test_repeated_letters(self):
+        words = ['AAA', 'ZZZ']
+        expected = {'AAA': 3, 'ZZZ': 30}
+        result = self.calc_score(words)
+        #print("Repeated letters test:", result)
+        return result == expected
+
+    # 5. Test empty word
+    def test_empty_word(self):
+        words = ['']
+        expected = {'': 0}
+        result = self.calc_score(words)
+        #print("Empty word test:", result)
+        return result == expected
+
+    # 6. Test empty list
+    def test_empty_list(self):
+        words = []
+        expected = {}
+        result = self.calc_score(words)
+        #print("Empty list test:", result)
+        return result == expected
+
+    # 7. Stress test / performance
+    def stress_test(self):
+        words = ['CAT', 'TAB', 'BUZZ', 'QUIZ', 'JAZZ', 'AX']
+        start_time = time.perf_counter()
+        self.calc_score(words)
+        end_time = time.perf_counter()
+        runtime = end_time - start_time
+
+        return runtime
+
+# Testing Suite
 if __name__ == "__main__":      # So that it won’t run when the file is imported
     WS = WordScoring()
     print(WS.calc_score(['CAT', 'TAB', 'BUZZ']))
+
+    print("Running WordScoring Tests...")
+    print("Testing Normal words:", WS.test_normal_words())
+    print("Testing Single letters:", WS.test_single_letters())
+    print("Testing Repeated letters:", WS.test_repeated_letters())
+    print("Testing Empty word:", WS.test_empty_word())
+    print("Testing Empty list:", WS.test_empty_list())
+    print("Stress test runtime:", WS.stress_test)
