@@ -45,3 +45,11 @@ def solve(frame3, tiles, words_text, score_list, generator):
         score = generator.score[word]  # get score for this word
         score_list.insert("end", f"{score}\n")
     score_list.config(state="disabled")
+
+def check_word(word, result_label):
+    with open("dictionary.txt", "r") as file:
+        contents = file.read()
+    if word.upper() in contents:
+        result_label.config(text="Yes")
+    else:
+        result_label.config(text="No")
