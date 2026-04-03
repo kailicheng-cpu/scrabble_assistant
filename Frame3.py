@@ -44,8 +44,7 @@ def create_frame3(root, frame2):
     letter_filter = tk.Entry(frame3, font=("Courier", 50), validate="key", validatecommand=vcmd_alpha)
     letter_filter.place(x=1210, y=530, width=110, height=70)
 
-    next_button = tk.Button(frame3, text="Next Round", command=lambda: show_frame(frame2),
-                            font=("Courier", 30, "bold"))
+    next_button = tk.Button(frame3, text="Next Round", command=lambda: show_frame(frame2), font=("Courier", 30, "bold"))
     next_button.place(x=828, y=700, width=492, height=63)
 
     # Words Text Box + Scrollbar
@@ -69,4 +68,4 @@ def create_frame3(root, frame2):
     score_list.bind("<MouseWheel>", on_mousewheel)
     words_text.bind("<MouseWheel>", on_mousewheel)
 
-    return frame3, letterN_filter, letter_filter, words_text, score_list
+    return frame3, letterN_filter, letter_filter, words_text, score_list, next_button
