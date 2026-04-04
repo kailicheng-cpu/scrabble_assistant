@@ -25,9 +25,6 @@ def solve(frame3, tiles, words_text, score_list, generator):
     # 2. Store them in the generator so other frames can access
     generator.words = valid_words
     generator.score = scores
-
-    # Test to see if code ran
-    print("solve")
     
     # 3. Raise frame3
     frame3.tkraise()
@@ -48,8 +45,60 @@ def solve(frame3, tiles, words_text, score_list, generator):
 
 def check_word(word, result_label):
     with open("dictionary.txt", "r") as file:
-        contents = file.read()
-    if word.upper() in contents:
+        word_list = [line.strip().upper() for line in file]
+
+    if word.upper() in word_list:
         result_label.config(text="Yes")
     else:
         result_label.config(text="No")
+
+def update_highest_score(word_filter, words_text, score_list):
+    
+    filtered_words, filtered_scores = word_filter.highest_score()
+    
+    words_text.config(state="normal")
+    words_text.delete("1.0", "end")
+    
+    score_list.config(state="normal")
+    score_list.delete("1.0", "end")
+    
+    for word in filtered_words:
+        words_text.insert("end", word + "\n")
+        score_list.insert("end", str(filtered_scores[word]) + "\n")
+    
+    words_text.config(state="disabled")
+    score_list.config(state="disabled")
+
+def update_longest_word(word_filter, words_text, score_list):
+    
+    filtered_words, filtered_scores = word_filter.longest_word()
+    
+    words_text.config(state="normal")
+    words_text.delete("1.0", "end")
+    
+    score_list.config(state="normal")
+    score_list.delete("1.0", "end")
+    
+    for word in filtered_words:
+        words_text.insert("end", word + "\n")
+        score_list.insert("end", str(filtered_scores[word]) + "\n")
+    
+    words_text.config(state="disabled")
+    score_list.config(state="disabled")
+
+def update_shortest_word(word_filter, words_text, score_list):
+    
+    filtered_words, filtered_scores = word_filter.shortest_word()
+    
+    words_text.config(state="normal")
+    words_text.delete("1.0", "end")
+    
+    score_list.config(state="normal")
+    score_list.delete("1.0", "end")
+    
+    for word in filtered_words:
+        words_text.insert("end", word + "\n")
+        score_list.insert("end", str(filtered_scores[word]) + "\n")
+    
+    words_text.config(state="disabled")
+    score_list.config(state="disabled")

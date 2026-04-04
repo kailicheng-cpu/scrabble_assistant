@@ -1,9 +1,13 @@
 import tkinter as tk
-from utils import validate_single_alpha, validate_single_digit, show_frame
+from utils import validate_single_alpha, validate_single_digit, show_frame, update_highest_score, update_longest_word, update_shortest_word
+from WordFilter import WordFilter
+from Frame2 import generator
 
 def create_frame3(root, frame2):
     frame3 = tk.Frame(root, bg="lightblue")
     frame3.place(relx=0, rely=0, relwidth=1, relheight=1)
+
+    word_filter = WordFilter(generator)
 
     frame3.valid_words = []
 
@@ -21,13 +25,18 @@ def create_frame3(root, frame2):
     filter_label.place(x=820, y=30)
 
     # Filter Buttons
-    Highest_button = tk.Button(frame3, text="Highest Score", font=("Courier", 30, "bold"))
+    Highest_button = tk.Button(
+    frame3,
+    text="Highest Score",
+    font=("Courier", 30, "bold"),
+    command=lambda: update_highest_score(word_filter, words_text, score_list)
+)
     Highest_button.place(x=820, y=130, width=500, height=70)
 
-    Longest_button = tk.Button(frame3, text="Longest Word", font=("Courier", 30, "bold"))
+    Longest_button = tk.Button(frame3, text="Longest Word", command=lambda: update_longest_word(word_filter, words_text, score_list), font=("Courier", 30, "bold"))
     Longest_button.place(x=820, y=230, width=500, height=70)
 
-    Shortest_button = tk.Button(frame3, text="Shortest Word", font=("Courier", 30, "bold"))
+    Shortest_button = tk.Button(frame3, text="Shortest Word", command=lambda: update_shortest_word(word_filter, words_text, score_list), font=("Courier", 30, "bold"))
     Shortest_button.place(x=820, y=330, width=500, height=70)
 
     letters_button = tk.Button(frame3, text="Number of letters:", font=("Courier", 30, "bold"))
