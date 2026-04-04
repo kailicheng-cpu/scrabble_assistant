@@ -102,3 +102,40 @@ def update_shortest_word(word_filter, words_text, score_list):
     
     words_text.config(state="disabled")
     score_list.config(state="disabled")
+
+def update_contains_letter(word_filter, words_text, score_list, letter):
+    
+    filtered_words, filtered_scores = word_filter.contains_letter(letter)
+    
+    words_text.config(state="normal")
+    words_text.delete("1.0", "end")
+    
+    score_list.config(state="normal")
+    score_list.delete("1.0", "end")
+    
+    for word in filtered_words:
+        words_text.insert("end", word + "\n")
+        score_list.insert("end", str(filtered_scores[word]) + "\n")
+    
+    words_text.config(state="disabled")
+    score_list.config(state="disabled")
+
+def update_word_length(word_filter, words_text, score_list, length):
+    
+    filtered_words, filtered_scores = word_filter.word_length(int(length))
+        
+
+    print(length)
+
+    words_text.config(state="normal")
+    words_text.delete("1.0", "end")
+        
+    score_list.config(state="normal")
+    score_list.delete("1.0", "end")
+        
+    for word in filtered_words:
+        words_text.insert("end", word + "\n")
+        score_list.insert("end", str(filtered_scores[word]) + "\n")
+        
+    words_text.config(state="disabled")
+    score_list.config(state="disabled")

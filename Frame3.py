@@ -1,5 +1,5 @@
 import tkinter as tk
-from utils import validate_single_alpha, validate_single_digit, show_frame, update_highest_score, update_longest_word, update_shortest_word
+from utils import validate_single_alpha, validate_single_digit, show_frame, update_highest_score, update_longest_word, update_shortest_word, update_contains_letter, update_word_length
 from WordFilter import WordFilter
 from Frame2 import generator
 
@@ -25,12 +25,7 @@ def create_frame3(root, frame2):
     filter_label.place(x=820, y=30)
 
     # Filter Buttons
-    Highest_button = tk.Button(
-    frame3,
-    text="Highest Score",
-    font=("Courier", 30, "bold"),
-    command=lambda: update_highest_score(word_filter, words_text, score_list)
-)
+    Highest_button = tk.Button(frame3, text="Highest Score", font=("Courier", 30, "bold"), command=lambda: update_highest_score(word_filter, words_text, score_list))
     Highest_button.place(x=820, y=130, width=500, height=70)
 
     Longest_button = tk.Button(frame3, text="Longest Word", command=lambda: update_longest_word(word_filter, words_text, score_list), font=("Courier", 30, "bold"))
@@ -39,14 +34,14 @@ def create_frame3(root, frame2):
     Shortest_button = tk.Button(frame3, text="Shortest Word", command=lambda: update_shortest_word(word_filter, words_text, score_list), font=("Courier", 30, "bold"))
     Shortest_button.place(x=820, y=330, width=500, height=70)
 
-    letters_button = tk.Button(frame3, text="Number of letters:", font=("Courier", 30, "bold"))
+    letters_button = tk.Button(frame3, text="Number of letters:", command=lambda: update_word_length(word_filter, words_text, score_list, letterN_filter.get()), font=("Courier", 30, "bold"))
     letters_button.place(x=820, y=430, width=380, height=70)
 
     vcmd_digit = (root.register(validate_single_digit), '%P')
     letterN_filter = tk.Entry(frame3, font=("Courier", 50), validate="key", validatecommand=vcmd_digit)
     letterN_filter.place(x=1210, y=430, width=110, height=70)
 
-    Contains_button = tk.Button(frame3, text="Contains letter:", font=("Courier", 30, "bold"))
+    Contains_button = tk.Button(frame3, text="Contains letter:", command=lambda: update_contains_letter(word_filter, words_text, score_list, letter_filter.get()), font=("Courier", 30, "bold"))
     Contains_button.place(x=820, y=530, width=380, height=70)
 
     vcmd_alpha = (root.register(validate_single_alpha), '%P')
