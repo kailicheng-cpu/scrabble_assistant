@@ -111,3 +111,111 @@ def create_frame3(root, frame2):
     words_text.bind("<MouseWheel>", on_mousewheel)
 
     return frame3, letterN_filter, letter_filter, words_text, score_list, next_button
+
+# -------------------- Testing ----------------------
+
+"""
+Manual testing
+
+Test 1: Highest score button
+
+Action: Click "Highest Score"
+Expected: Only highest scoring words displayed
+Actual: Only top scoring words shown
+Result: PASS
+
+Test 2: Longest word button
+
+Action: Click "Longest Word"
+Expected: Only longest words displayed
+Actual: Longest words shown correctly
+Result: PASS
+
+Test 3: Shortest word button
+
+Action: Click "Shortest Word"
+Expected: Only shortest words displayed
+Actual: Shortest words shown correctly
+Result: PASS
+
+Test 4: Valid length input (Number of letters)
+
+Input: 3
+Action: Click "Number of letters"
+Expected: Only 3-letter words displayed
+Actual: Correct words shown
+Result: PASS
+
+Test 5: Invalid input (letter instead of number)
+
+Input: "A"
+Expected: Input rejected (only digits allowed)
+Actual: Letter not entered
+Result: PASS
+
+Test 6: Empty input for Number of letters
+
+Input: ""
+Action: Click button
+Expected: No change
+Actual: Error message in terminal but did not affect anything on screen
+Result: PASS
+
+Test 7: Valid letter filter
+
+Input: "A"
+Action: Click "Contains letter"
+Expected: Only words containing "A"
+Actual: Filter worked correctly
+Result: PASS
+
+Test 8: Lowercase letter input
+
+Input: "a"
+Expected: Treated same as uppercase
+Actual: Works correctly
+Result: PASS
+
+Test 9: Invalid input (number)
+
+Input: "1"
+Expected: Input rejected
+Actual: Number not entered
+Result: PASS
+
+Test 10: Scrollbar sync
+
+Action: Scroll using scrollbar
+Expected: Words and scores scroll together
+Actual: Both boxes scroll in sync
+Result: PASS
+
+Test 11: Mouse wheel scroll
+
+Action: Use mouse wheel
+Expected: Both text boxes scroll together
+Actual: Scrolling synced correctly
+Result: PASS
+
+Test 12: Return to frame2
+
+Action: Click "Next Round"
+Expected: Return to input screen (frame2)
+Actual: Frame changed correctly
+Result: PASS
+
+Test 13: Multiple filters in a row
+
+Action: Click multiple filter buttons (e.g., Highest → Longest → Shortest)
+Expected: Each filter updates results correctly
+Actual: Filters applied correctly each time
+Result: PASS
+
+Test 14: No matching results
+
+Input: Letter or length with no matches
+Expected: Empty result displayed
+Actual: No words shown
+Result: PASS
+
+"""

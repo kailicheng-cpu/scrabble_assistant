@@ -54,3 +54,35 @@ def create_frame4(root, show_frame_func, frame4):
 
     # Return Widgets 
     return frame4, enter_word, back_button
+
+    # -------------------- Testing ----------------------
+"""
+Test 1: Valid word input
+
+Input: "CAT"
+Expected: Label displays "Yes"
+Actual: Label displayed "Yes"
+Result: PASS
+
+Test 2: Lowercase input
+
+Input: "dog"
+Expected: Label displays "Yes"
+Actual: Label displayed "Yes"
+Result: PASS
+
+Test 3: Invalid characters
+
+Input: "CAT1"
+Expected: Number not allowed
+Actual: Number not entered
+Result: PASS
+
+Test 4: Wildcard input
+
+Input: "C*T"
+Expected: Wildcard not accepted
+Actual: Wildcard not accepted
+Result: PASS
+
+"""
