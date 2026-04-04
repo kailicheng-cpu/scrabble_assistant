@@ -4,15 +4,51 @@ from WordFilter import WordFilter
 from Frame2 import generator
 
 def create_frame3(root, frame2):
+    """
+    Creates frame3, the results and word-filtering interface for the Scrabble Assistant.
+
+    Parameters:
+
+    root : tk.Tk
+        The main Tkinter window.
+    frame2 : tk.Frame
+        The previous frame where letters are entered, used for returning via "Next Round"
+
+    Returns:
+
+        - frame3: the Tkinter frame containing all results and filters.
+        - letterN_filter: Entry widget for specifying word length filter.
+        - letter_filter: Entry widget for specifying letter-contained filter.
+        - words_text: Text widget displaying filtered/generated words.
+        - score_list: Text widget displaying corresponding scores.
+        - next_button: Button widget to go back to frame2.
+
+    Description:
+
+    - Initializes frame3 with a light blue background.
+    - Creates a WordFilter object linked to the global generator to handle scoring and filtering.
+    - Sets up labels for "Words", "Score", and "Filter Category".
+    - Adds filter buttons:
+        * "Highest Score" shows highest scoring words.
+        * "Longest Word" shows the longest words.
+        * "Shortest Word" shows the shortest words.
+        * "Number of letters" filters by word length using the letterN_filter Entry.
+        * "Contains letter" filters words containing a specific letter from letter_filter Entry.
+    - Adds Entry widgets with validation:
+        * letterN_filter accepts only single digits.
+        * letter_filter accepts only single alphabetic letters.
+    - Includes a "Next Round" button to return to frame2.
+    - Sets up words_text and score_list Text widgets with a shared vertical scrollbar.
+    - Synchronizes mouse wheel scrolling between words_text and score_list
+    """
+    # Setup background
     frame3 = tk.Frame(root, bg="lightblue")
     frame3.place(relx=0, rely=0, relwidth=1, relheight=1)
 
+    # Initialize word filter object
     word_filter = WordFilter(generator)
 
     frame3.valid_words = []
-
-    results_label = tk.Label(frame3, font=("Courier", 20))
-    results_label.pack()
 
     # Labels
     words_label = tk.Label(frame3, font=("Courier", 50), text="Words", bg="lightblue")
@@ -37,17 +73,19 @@ def create_frame3(root, frame2):
     letters_button = tk.Button(frame3, text="Number of letters:", command=lambda: update_word_length(word_filter, words_text, score_list, letterN_filter.get()), font=("Courier", 30, "bold"))
     letters_button.place(x=820, y=430, width=380, height=70)
 
+    Contains_button = tk.Button(frame3, text="Contains letter:", command=lambda: update_contains_letter(word_filter, words_text, score_list, letter_filter.get()), font=("Courier", 30, "bold"))
+    Contains_button.place(x=820, y=530, width=380, height=70)
+
+    # Text entries for filters 
     vcmd_digit = (root.register(validate_single_digit), '%P')
     letterN_filter = tk.Entry(frame3, font=("Courier", 50), validate="key", validatecommand=vcmd_digit)
     letterN_filter.place(x=1210, y=430, width=110, height=70)
-
-    Contains_button = tk.Button(frame3, text="Contains letter:", command=lambda: update_contains_letter(word_filter, words_text, score_list, letter_filter.get()), font=("Courier", 30, "bold"))
-    Contains_button.place(x=820, y=530, width=380, height=70)
 
     vcmd_alpha = (root.register(validate_single_alpha), '%P')
     letter_filter = tk.Entry(frame3, font=("Courier", 50), validate="key", validatecommand=vcmd_alpha)
     letter_filter.place(x=1210, y=530, width=110, height=70)
 
+    # Button to return to frame 2
     next_button = tk.Button(frame3, text="Next Round", command=lambda: show_frame(frame2), font=("Courier", 30, "bold"))
     next_button.place(x=828, y=700, width=492, height=63)
 
