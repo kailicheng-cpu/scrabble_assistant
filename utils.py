@@ -1,4 +1,5 @@
 import tkinter as tk
+import time
 
 # Frame management
 def show_frame(frame):
@@ -109,3 +110,75 @@ def update_word_length(word_filter, words_text, score_list, length):
         words_text.insert("end", word + "\n")
         score_list.insert("end", str(filtered_scores[word]) + "\n")
     words_text.config(state="disabled"); score_list.config(state="disabled")
+
+# -------------------- Testing ----------------------
+
+# Mock label
+class MockLabel:
+    def __init__(self):
+        self.text = ""
+    def config(self, text):
+        self.text = text
+
+
+# -------- Tests --------
+def test_check_word_exists(word):
+    label = MockLabel()
+    check_word(word, label)
+    return label.text == "Yes"
+
+def test_check_word_not_exists(word):
+    label = MockLabel()
+    check_word(word, label)
+    return label.text == "No"
+
+def test_check_word_case(word):
+    label = MockLabel()
+    check_word(word, label)
+    return label.text == "Yes"
+
+
+# -------- Test Data --------
+testing_words = [
+    ("HELLO", True),     # should exist
+    ("d", False),        # probably not a valid word
+    ("CAT", True),
+    ("elephant", True),
+    ("hdbfai", False),
+    ("", False),
+    ("tOwEr", True)      # case test
+]
+
+
+# -------- Runner --------
+def run_tests():
+    print("Running check_word tests...\n")
+    
+    start_total = time.time()
+    passed = 0
+
+    for word, should_exist in testing_words:
+        start = time.time()
+        
+        label = MockLabel()
+        check_word(word, label)
+        
+        result = (label.text == "Yes")
+        end = time.time()
+
+        runtime = round((end - start) * 1000, 3)
+
+        if result == should_exist:
+            print(f"[PASS] {word} → {label.text} ({runtime} ms)")
+            passed += 1
+        else:
+            print(f"[FAIL] {word} → got {label.text}, expected {'Yes' if should_exist else 'No'} ({runtime} ms)")
+
+    total_time = round((time.time() - start_total) * 1000, 3)
+
+    print(f"\n{passed}/{len(testing_words)} tests passed")
+    print(f"Total runtime: {total_time} ms")
+
+
+# Run
+run_tests()
