@@ -68,5 +68,5 @@ Output: ['ACT', 'AT', 'CAT']
 
 ## Contributers:
 
-Kaili Cheng  
-Finlay Spratt
+Finlay Spratt  
+Kaili Cheng
