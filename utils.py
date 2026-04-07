@@ -113,6 +113,8 @@ def update_word_length(word_filter, words_text, score_list, length):
 
 # -------------------- Testing ----------------------
 
+# Tests for check_word function
+
 # Mock label
 class MockLabel:
     def __init__(self):

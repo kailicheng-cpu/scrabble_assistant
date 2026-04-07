@@ -25,7 +25,6 @@ def create_frame2(root, show_frame_func, frame3, frame4, words_text, score_list)
 
     Returns:
 
-    tuple
         (frame2, enter_text, score_text)
         - frame2: the created Tkinter frame for letter entry.
         - enter_text: Entry widget where user types letters.
@@ -85,3 +84,76 @@ def create_frame2(root, show_frame_func, frame3, frame4, words_text, score_list)
     wild_button.place(x=950, y=300, width=160, height=80)
 
     return frame2, enter_text, score_text
+
+# -------------------- Testing ----------------------
+
+"""
+Manual testing
+
+Test 1: Valid letters
+Input: "CAT"
+Expected: Input accepted
+Actual: Input accepted
+Result: PASS
+
+Test 2: Wildcard input
+
+Input: "C*T"
+Expected: Input accepted (* allowed)
+Actual: Input accepted
+Result: PASS
+
+Test 3: Invalid characters
+
+Input: "CAT1"
+Expected: Input rejected (numbers not allowed)
+Actual: Number not entered
+Result: PASS
+
+Test 4: Too many characters
+
+Input: "ABCDEFGHIJK" (11 letters)
+Expected: Input limited to 10 characters
+Actual: Extra characters not accepted
+Result: PASS
+
+Test 5. Empty input
+
+Input: ""
+Action: Click Solve
+Expected: No crash, empty lists in frame3
+Actual: no words displayed
+Result: PASS
+
+Test 6: Wildcard input
+
+Input: "C*T"
+Action: Click Solve
+Expected: Words generated using wildcard
+Actual: Words generated correctly
+Result: PASS
+
+Test 7: Navigation to Frame 4
+
+Action: Click "Word Check"
+Expected: Switch to frame4
+Actual: Frame changed correctly
+Result: PASS
+
+Test 8: Add wildcard
+
+Input before: "CAT"
+Action: Click "Add Wild"
+Expected: "CAT*" appears in entry
+Actual: "*" added correctly
+Result: PASS
+
+Test 9: Input score
+
+Input before: 10
+Action: Switch to frame3 then back to frame2
+Expected: Score remains on the screen
+Actual: 10 is displayed
+Result: PASS
+
+"""
